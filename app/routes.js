@@ -4,7 +4,7 @@ import Middlewares from "./helpers/middlewares";
 import _root from "./controllers/root";
 import _login from "./controllers/login";
 import _jsonPatch from "./controllers/jsonPatch";
-// import _imgThumb from "./controllers/imgThumb";
+import _imgThumb from "./controllers/imgThumb";
 
 module.exports = express => {
 
@@ -21,6 +21,7 @@ module.exports = express => {
     _root(router, middlewares);
     _login(router, middlewares);
     _jsonPatch(router, middlewares);
+    _imgThumb(router, middlewares);
 
     // at this point router will contain all the routes and now it can be added to the express instance
 
