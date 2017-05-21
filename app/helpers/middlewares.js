@@ -5,20 +5,20 @@ import Jwt from "jsonwebtoken";
 import HTTP from "./httpcodes";
 
 // all the middleware function to reuse everywhere
-class Middleware {
+export default class Middleware {
 
     // will run first for every route in the app
-    applicationBase (req, res, next) {
+    static applicationBase (req, res, next) {
         next();
     }
 
     // will run for every request on the mentioned route
-    controllerBase (req, res, next) {
+    static controllerBase (req, res, next) {
         next();
     }
 
     // authenticating user with session/jwt
-    authenticate (req, res, next) {
+    static authenticate (req, res, next) {
 
         // checking if authorization header is set in the request.
         if (req.headers.authorization && req.headers.authorization.split(' ')[0] === "Bearer") {
@@ -47,5 +47,3 @@ class Middleware {
 
 
 }
-
-export default Middleware;

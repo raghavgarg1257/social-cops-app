@@ -1,19 +1,27 @@
 "use strict";
 
+import Middlewares from "../helpers/middlewares";
 import HTTP from "../helpers/httpcodes";
 
-module.exports = (router, middlewares) => {
+export default class Root {
 
-    router.route('/')
+    constructor(router) {
+        router.route('/')
 
-        .all(middlewares.controllerBase)
+        .all(Middlewares.controllerBase)
 
-        .get( (req, res, next) => {
-            res.status(HTTP.OK).json("Welcome to my world!");
-        } )
+        .get(this.get)
 
-        .post( (req, res, next) => {
-            res.status(HTTP.OK).json("So, you know there are more than one type of request");
-        } );
+        .post(this.post);
+    }
 
-};
+    get(req, res, next) {
+        res.status(HTTP.OK).json("Welcome to my world!");
+    }
+
+    post(req, res, next) {
+        res.status(HTTP.OK).json("So, you know there are more than one type of request");
+    }
+
+
+} // class end

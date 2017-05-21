@@ -6,80 +6,86 @@ import http from 'http';
 import fs from 'fs';
 import fileType from 'file-type';
 
+import Middlewares from "../helpers/middlewares";
 import HTTP from "../helpers/httpcodes";
 import { isExist } from "../helpers/methods";
 
-module.exports = (router, middlewares) => {
+export default class ImgThumb {
 
-    router.route('/img-thumb')
+    constructor(router) {
+        router.route('/img-thumb')
 
-        .all(middlewares.authenticate)
+        .all(Middlewares.authenticate)
 
-        .post( (req, res, next) => {
+        .post(this.post);
+    }
 
-            const mimeType = {
-                gif: 'image/gif',
-                jpg: 'image/jpeg',
-                png: 'image/png',
-                svg: 'image/svg+xml'
-            };
+    post(req, res, next) {
 
-            const url = req.body.url;
+        const mimeType = {
+            gif: 'image/gif',
+            jpg: 'image/jpeg',
+            png: 'image/png',
+            svg: 'image/svg+xml'
+        };
 
-            if (!isExist(url)) {
-                return res.status(HTTP.BAD_REQUEST).json({
-                    message: 'The url is required field'
-                });
-            }
+        const url = req.body.url;
 
-            http.get(url, imgRes => {
+        if (!isExist(url)) {
+            return res.status(HTTP.BAD_REQUEST).json({
+                message: 'The url is required field'
+            });
+        }
 
-                let ext = '', imagedata = [];
+        http.get(url, imgRes => {
 
-                imgRes.once('data', chunk => {
-                    ext = fileType(chunk).ext;
-                });
+            let ext = '', imagedata = [];
 
-                imgRes.on('data', chunk => {
-                    imagedata = [...imagedata, chunk];
-                })
-
-                imgRes.on('end', () => {
-
-                    const imgName = `public/images/${uuidV4()}.${ext}`;
-
-                    const buffer = Buffer.concat(imagedata);
-                    fs.writeFile(imgName, buffer, err => {
-                        if (err) throw err;
-
-                        im.resize({
-                            srcPath: imgName,
-                            dstPath: imgName,
-                            width: 50
-                        }, (err, stdout, stderr) => {
-                            if (err) throw err;
-
-                            var output = fs.createReadStream(imgName);
-                            output.on('open', () => {
-                                res.set('Content-Type', mimeType[ext]);
-                                output.pipe(res);
-                            });
-                            output.on('error', () => {
-                                return res.status(HTTP.INTERNAL_SERVER_ERROR).end('Error occured!');
-                            });
-
-
-                        });
-
-                    }); // end if write file
-
-                }); // end of res-end
-
-            })
-            .on('error', error => {
-                return res.status(HTTP.INTERNAL_SERVER_ERROR).end('Error occured!');
+            imgRes.once('data', chunk => {
+                ext = fileType(chunk).ext;
             });
 
-        } );
+            imgRes.on('data', chunk => {
+                imagedata = [...imagedata, chunk];
+            })
 
-};
+            imgRes.on('end', () => {
+
+                const imgName = `public/images/${uuidV4()}.${ext}`;
+
+                const buffer = Buffer.concat(imagedata);
+                fs.writeFile(imgName, buffer, err => {
+                    if (err) throw err;
+
+                    im.resize({
+                        srcPath: imgName,
+                        dstPath: imgName,
+                        width: 50
+                    }, (err, stdout, stderr) => {
+                        if (err) throw err;
+
+                        var output = fs.createReadStream(imgName);
+                        output.on('open', () => {
+                            res.set('Content-Type', mimeType[ext]);
+                            output.pipe(res);
+                        });
+                        output.on('error', () => {
+                            return res.status(HTTP.INTERNAL_SERVER_ERROR).end('Error occured!');
+                        });
+
+
+                    });
+
+                }); // end if write file
+
+            }); // end of res-end
+
+        })
+        .on('error', error => {
+            return res.status(HTTP.INTERNAL_SERVER_ERROR).end('Error occured!');
+        });
+
+    } // post end
+
+
+} // class end

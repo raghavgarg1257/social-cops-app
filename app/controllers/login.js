@@ -2,37 +2,43 @@
 
 import Jwt from "jsonwebtoken";
 
+import Middlewares from "../helpers/middlewares";
 import HTTP from "../helpers/httpcodes";
 import { isExist } from "../helpers/methods";
 
-module.exports = (router, middlewares) => {
+export default class Login {
 
-    router.route('/login')
+    constructor(router) {
+        router.route('/login')
 
-        .all(middlewares.controllerBase)
+        .all(Middlewares.controllerBase)
 
-        .post( (req, res, next) => {
+        .post(this.post);
+    }
 
-            const username = req.body.username;
-            const password = req.body.password;
+    post(req, res, next) {
 
-            if (!isExist(username) || !isExist(password)) {
-                return res.status(HTTP.BAD_REQUEST).json({
-                    message: "Both username and password are required fields"
-                });
-            }
+        const username = req.body.username;
+        const password = req.body.password;
 
-            const token = Jwt.sign(
-                { username, password },
-                new Buffer(process.env.JWT_SECRET, "base64"),
-                { algorithm: 'HS512', expiresIn: '1d' }
-            );
-
-            res.status(HTTP.OK).json({
-                message: "User successfully authenticated",
-                data: { username, token }
+        if (!isExist(username) || !isExist(password)) {
+            return res.status(HTTP.BAD_REQUEST).json({
+                message: "Both username and password are required fields"
             });
+        }
 
-        } );
+        const token = Jwt.sign(
+            { username, password },
+            new Buffer(process.env.JWT_SECRET, "base64"),
+            { algorithm: 'HS512', expiresIn: '1d' }
+        );
 
-};
+        res.status(HTTP.OK).json({
+            message: "User successfully authenticated",
+            data: { username, token }
+        });
+
+    }
+
+
+} // class end

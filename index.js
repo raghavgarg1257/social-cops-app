@@ -7,7 +7,7 @@ import dotenv from "dotenv";
 import logger from "morgan";
 
 // importing our files
-import router from "./app/routes";
+import Routes from "./app/routes";
 
 
 // injecting environment variables
@@ -35,7 +35,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 // setting up routes for our app
 // we made router a function so that any instance can be passed from here
 // should be defined just before starting the server
-app.use('/', router(express));
+app.use('/', new Routes(express));
 
 
 // start the server

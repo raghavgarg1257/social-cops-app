@@ -1,31 +1,37 @@
 "use strict";
 
-import JsonPatch from 'json-patch';
+import jsonpatch from 'json-patch';
 
+import Middlewares from "../helpers/middlewares";
 import HTTP from "../helpers/httpcodes";
 import { isExist } from "../helpers/methods";
 
-module.exports = (router, middlewares) => {
+export default class JsonPatch {
 
-    router.route('/json-patch')
+    constructor(router) {
+        router.route('/json-patch')
 
-        .all(middlewares.authenticate)
+        .all(Middlewares.authenticate)
 
-        .post( (req, res, next) => {
+        .post(this.post);
+    }
 
-            const jsonBody = req.body.json;
-            const jsonPatch = req.body.patch;
+    post(req, res, next) {
 
-            if (!isExist(jsonBody) || !isExist(jsonPatch)) {
-                return res.status(HTTP.BAD_REQUEST).json({
-                    message: "Both json and patch are required fields"
-                });
-            }
+        const body = req.body.json;
+        const patch = req.body.patch;
 
-            const result = JsonPatch.apply(jsonBody, jsonPatch);
+        if (!isExist(body) || !isExist(patch)) {
+            return res.status(HTTP.BAD_REQUEST).json({
+                message: "Both json and patch are required fields"
+            });
+        }
 
-            res.status(HTTP.OK).json(result);
+        const result = jsonpatch.apply(body, patch);
 
-        } );
+        res.status(HTTP.OK).json(result);
 
-};
+    }
+
+
+} // class end
