@@ -17,11 +17,24 @@ module.exports = (router, middlewares) => {
 
         .post( (req, res, next) => {
 
+            const mimeType = {
+                gif: 'image/gif',
+                jpg: 'image/jpeg',
+                png: 'image/png',
+                svg: 'image/svg+xml'
+            };
+
             const url = req.body.url;
+
+            if (!isExist(url)) {
+                return res.status(HTTP.BAD_REQUEST).json({
+                    message: 'The url is required field'
+                });
+            }
 
             http.get(url, imgRes => {
 
-                let ext = '', imagedata = '';
+                let ext = '', imagedata = [];
 
                 imgRes.once('data', chunk => {
                     ext = fileType(chunk).ext;
@@ -36,9 +49,7 @@ module.exports = (router, middlewares) => {
                     const imgName = `public/images/${uuidV4()}.${ext}`;
 
                     const buffer = Buffer.concat(imagedata);
-
                     fs.writeFile(imgName, buffer, err => {
-
                         if (err) throw err;
 
                         im.resize({
@@ -47,7 +58,17 @@ module.exports = (router, middlewares) => {
                             width: 50
                         }, (err, stdout, stderr) => {
                             if (err) throw err;
-                            console.log('image resized');
+
+                            var output = fs.createReadStream(imgName);
+                            output.on('open', () => {
+                                res.set('Content-Type', mimeType[ext]);
+                                output.pipe(res);
+                            });
+                            output.on('error', () => {
+                                return res.status(HTTP.INTERNAL_SERVER_ERROR).end('Error occured!');
+                            });
+
+
                         });
 
                     }); // end if write file
@@ -56,33 +77,7 @@ module.exports = (router, middlewares) => {
 
             })
             .on('error', error => {
-                console.log('we have got problem: ', error);
-            });
-
-
-
-            // http.get(url, res => {
-            //     res.once('data', chunk => {
-            //
-            //         res.destroy();
-            //
-            //         const { ext } = fileType(chunk);
-            //
-            //         im.resize({
-            //             srcPath: url,
-            //             dstPath: `public/images/${uuidV4()}.${ext}`,
-            //             width: 50
-            //         }, (err, stdout, stderr) => {
-            //             if (err) throw err;
-            //             console.log('image resized');
-            //         });
-            //
-            //     });
-            // });
-
-
-            res.status(HTTP.OK).json({
-                url
+                return res.status(HTTP.INTERNAL_SERVER_ERROR).end('Error occured!');
             });
 
         } );
