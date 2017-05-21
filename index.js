@@ -5,7 +5,6 @@ import express from "express";
 import bodyParser from "body-parser";
 import dotenv from "dotenv";
 import logger from "morgan";
-import mongoose from 'mongoose';
 
 // importing our files
 import router from "./app/routes";
@@ -39,11 +38,5 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use('/', router(express));
 
 
-// making DB connection
-mongoose.connect(`mongodb://localhost/${process.env.DB}`);
-const db = mongoose.connection;
-db.on('error', console.error.bind(console, 'connection error:'));
-db.once('open', () => {
-    // start the server if only db connection is succesfull
-    app.listen(port, () => console.log(`App started at: ${port}`) );
-});
+// start the server
+app.listen(port, () => console.log(`App started at: http://localhost:${port}`) );
