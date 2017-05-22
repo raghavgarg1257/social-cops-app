@@ -5,7 +5,7 @@ The problem statement has been uploaded in the repo.
 Using ES6, with [Babel](http://babeljs.io/)
 
 ## Pre-requisite
-1. NodeJS [link](https://nodejs.org/en/)
+1. NodeJS (https://nodejs.org/en/)
 2. Globally installed nodemon (https://nodemon.io/)
 
 ## Setup
