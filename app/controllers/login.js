@@ -23,7 +23,7 @@ export default class Login {
 
         if (!isExist(username) || !isExist(password)) {
             return res.status(HTTP.BAD_REQUEST).json({
-                message: "Both username and password are required fields"
+                error: "Both username and password are required fields"
             });
         }
 

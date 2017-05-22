@@ -33,7 +33,7 @@ export default class ImgThumb {
 
         if (!isExist(url)) {
             return res.status(HTTP.BAD_REQUEST).json({
-                message: 'The url is required field'
+                error: 'The url is required field'
             });
         }
 
