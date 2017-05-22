@@ -19,20 +19,29 @@ npm start # the server will be started and link will be printed in the terminal
 ```
 
 ## Usage (available routes)
-The routes can tested using [Postman](https://chrome.google.com/webstore/detail/postman/fhbjgbiflinjbdggehcddcbncdddomop?hl=en).
+The routes can be tested using [Postman](https://chrome.google.com/webstore/detail/postman/fhbjgbiflinjbdggehcddcbncdddomop?hl=en).
 
-
-- Public Routes
+**Note** - to use protected routes an extra header needs to be added like:
 ```
+HEADER {
+    "Authorization" : "Bearer JWT_TOKEN" # note the space between keyword Bearer and JWT_TOKEN
+}
+```
+
+```
+type: public
 req: GET /
 res: text
 ```
 ```
+type: public
 req: POST /
 res: text
 ```
+<!-- desc: login route, user can send username and password, and recieve JWT_TOKEN for making request to protected routes. Currently no authentication process is in  -->
 ```
-desc: login route, user can send username and password, and recieve JWT_TOKEN for making request to protected routes. Currently no authentication process is in place, every username and password will be processed.
+type: public
+place, every username and password will be processed.
 req: POST /login {
     "username" : String,
     "password" : String
@@ -45,14 +54,8 @@ res:{
     }
 }
 ```
-
-- Protected Routes (need to set an extra header)
 ```
-HEADER {
-    "Authorization" : "Bearer JWT_TOKEN" # note the space between keyword Bearer and JWT_TOKEN
-}
-```
-```
+type: protected
 req: POST /json-patch {
     json : JSON Object,
     patch: JSON Patch Object
@@ -60,6 +63,7 @@ req: POST /json-patch {
 req: JSON Object (after applying the patch)
 ```
 ```
+type: protected
 req: POST /img-thumb {
     url : String (valid image url)
 }
