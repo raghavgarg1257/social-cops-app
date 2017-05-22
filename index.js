@@ -4,7 +4,7 @@
 import express from "express";
 import bodyParser from "body-parser";
 import dotenv from "dotenv";
-import logger from "morgan";
+//import logger from "morgan";
 
 // importing our files
 import Routes from "./app/routes";
@@ -21,7 +21,7 @@ const app = express();
 
 
 // to log every request to the console
-app.use(logger('dev'));
+//app.use(logger('dev'));
 
 
 // set static files (css and images, etc) location
