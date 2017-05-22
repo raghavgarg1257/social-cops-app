@@ -8,6 +8,7 @@ import logger from "morgan";
 
 // importing our files
 import Routes from "./app/routes";
+import Middlewares from "./app/helpers/middlewares";
 
 
 // injecting environment variables
@@ -30,6 +31,10 @@ app.use(express.static('public'));
 // setting up body parser
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
+
+
+// server error handler
+app.use(Middlewares.serverErrorHandler);
 
 
 // setting up routes for our app

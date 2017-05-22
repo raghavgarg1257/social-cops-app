@@ -7,6 +7,20 @@ import HTTP from "./httpcodes";
 // all the middleware function to reuse everywhere
 export default class Middleware {
 
+    static serverErrorHandler (err, req, res, next) {
+
+        if ( err instanceof SyntaxError && err.status === 400 && 'body' in err ) {
+
+            return res.status(HTTP.BAD_REQUEST).json({
+                error: "invalid json"
+            });
+        }
+        else {
+            next();
+        }
+
+    }
+
     // will run first for every route in the app
     static applicationBase (req, res, next) {
         next();

@@ -23,14 +23,20 @@ export default class JsonPatch {
 
         if (!isExist(body) || !isExist(patch)) {
             return res.status(HTTP.BAD_REQUEST).json({
-                message: "Both json and patch are required fields"
+                error: "Both json and patch are required fields"
             });
         }
 
-        const result = jsonpatch.apply(body, patch);
+        try {
+            const result = jsonpatch.apply(body, patch);
+        } catch (e) {
+            return res.status(HTTP.BAD_REQUEST).json({
+                error: e.message
+            });
+        }
 
         res.status(HTTP.OK).json(result);
-
+        
     }
 
 
