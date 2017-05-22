@@ -36,7 +36,7 @@ export default class JsonPatch {
         }
 
         res.status(HTTP.OK).json(result);
-        
+
     }
 
 

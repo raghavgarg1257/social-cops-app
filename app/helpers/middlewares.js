@@ -12,7 +12,7 @@ export default class Middleware {
         if ( err instanceof SyntaxError && err.status === 400 && 'body' in err ) {
 
             return res.status(HTTP.BAD_REQUEST).json({
-                error: "invalid json"
+                error: "invalid body"
             });
         }
         else {
