@@ -5,8 +5,8 @@ The problem statement has been uploaded in the repo.
 Using ES6, with [Babel](http://babeljs.io/)
 
 ## Pre-requisite
-1. NodeJS (https://nodejs.org/en/)
-2. Globally installed nodemon (https://nodemon.io/)
+1. [NodeJS](https://nodejs.org/en/)
+2. Globally installed [nodemon](https://nodemon.io/) (to use `npm run dev`)
 
 ## Setup
 ```
