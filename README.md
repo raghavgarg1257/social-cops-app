@@ -67,4 +67,5 @@ req: POST /img-thumb {
     url : String (valid image url)
 }
 res: Image
+note: the url with `https` will not work. 
 ```
