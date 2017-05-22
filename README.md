@@ -2,6 +2,7 @@
 
 The problem statement has been uploaded in the repo.
 
+Using ES6, with [Babel](http://babeljs.io/)
 
 ## Pre-requisite
 - NodeJS [link](https://nodejs.org/en/)
