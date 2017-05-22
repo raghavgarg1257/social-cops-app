@@ -21,7 +21,7 @@ npm start # the server will be started and link will be printed in the terminal
 ## Usage (available routes)
 The routes can be tested using [Postman](https://chrome.google.com/webstore/detail/postman/fhbjgbiflinjbdggehcddcbncdddomop?hl=en).
 
-**Note** - to use protected routes an extra header needs to be added like:
+**Note** - to use protected routes an extra header needs to be added in request of format like:
 ```
 HEADER {
     "Authorization" : "Bearer JWT_TOKEN" # note the space between keyword Bearer and JWT_TOKEN
