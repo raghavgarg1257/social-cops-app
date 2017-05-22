@@ -15,7 +15,7 @@ cd social-cops-app
 cp .env.example .env
 nano .env # optional, you can set port and jwt secret
 npm install
-npm start # after the server will be started and link will be printed in the terminal
+npm start # the server will be started and link will be printed in the terminal
 ```
 
 ## Usage(available routes)
