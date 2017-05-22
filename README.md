@@ -24,20 +24,20 @@ The routes can tested using [Postman](https://chrome.google.com/webstore/detail/
 
 - Public Routes
 ```
-**req**: GET /
-**res**: text
+req: GET /
+res: text
 ```
 ```
 req: POST /
-**res**: text
+res: text
 ```
 ```
-**desc**: login route, user can send username and password, and recieve JWT_TOKEN for making request to protected routes. Currently no authentication process is in place, every username and password will be processed.
-**req**: POST /login {
+desc: login route, user can send username and password, and recieve JWT_TOKEN for making request to protected routes. Currently no authentication process is in place, every username and password will be processed.
+req: POST /login {
     "username" : String,
     "password" : String
 }
-**res**:{
+res:{
     "message": String,
     "data": {
         "username": String,
@@ -53,15 +53,15 @@ HEADER {
 }
 ```
 ```
-**req**: POST /json-patch {
+req: POST /json-patch {
     json : JSON Object,
     patch: JSON Patch Object
 }
-**req**: JSON Object (after applying the patch)
+req: JSON Object (after applying the patch)
 ```
 ```
-**req**: POST /img-thumb {
+req: POST /img-thumb {
     url : String (valid image url)
 }
-**res**: Image
+res: Image
 ```
