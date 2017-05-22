@@ -118,7 +118,7 @@ export default class ImgThumb {
             });
 
         } catch (e) {
-            console.log('we have got error', e);
+            console.log('we have got an error', e);
         }
 
 
