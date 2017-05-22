@@ -31,12 +31,12 @@ HEADER {
 ```
 type: public
 req: GET /
-res: text
+res: Text
 ```
 ```
 type: public
 req: POST /
-res: text
+res: Text
 ```
 <!-- desc: login route, user can send username and password, and recieve JWT_TOKEN for making request to protected routes. Currently no authentication process is in place, every username and password will be processed. -->
 ```
