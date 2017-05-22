@@ -56,6 +56,7 @@ res:{
 }
 ```
 ```
+desc: json-patch route, user can send json and patch(http://jsonpatch.com/), and recieve new json.
 type: protected
 req: POST /json-patch {
     json : JSON Object,
@@ -64,10 +65,11 @@ req: POST /json-patch {
 req: JSON Object (after applying the patch)
 ```
 ```
+desc: image thumbnail route, user can send public image url, and recieve 50x50 pixel image as response.
+    : the url with 'https' will not work.
 type: protected
 req: POST /img-thumb {
     url : String (valid image url)
 }
 res: Image
-note: the url with `https` will not work.
 ```
