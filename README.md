@@ -38,8 +38,10 @@ type: public
 req: POST /
 res: Text
 ```
-<!-- desc: login route, user can send username and password, and recieve JWT_TOKEN for making request to protected routes. Currently no authentication process is in place, every username and password will be processed. -->
 ```
+desc: login route, user can send username and password, and recieve JWT_TOKEN.
+    : JWT_TOKEN can be used to making request to protected routes.
+    : Currently no authentication process is in place, every username and password will be processed.
 type: public
 req: POST /login {
     "username" : String,
@@ -67,5 +69,5 @@ req: POST /img-thumb {
     url : String (valid image url)
 }
 res: Image
-note: the url with `https` will not work. 
+note: the url with `https` will not work.
 ```
