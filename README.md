@@ -18,6 +18,9 @@ npm start # after the server will be started and link will be printed in the ter
 ```
 
 ## Usage(available routes)
+The routes can tested using [Postman](https://chrome.google.com/webstore/detail/postman/fhbjgbiflinjbdggehcddcbncdddomop?hl=en).
+
+
 - Public Routes
 ```
 req: GET /
