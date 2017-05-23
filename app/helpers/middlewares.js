@@ -1,5 +1,6 @@
 "use strict";
 
+import Raven from 'raven';
 import Jwt from "jsonwebtoken";
 
 import HTTP from "./httpcodes";
@@ -9,14 +10,20 @@ export default class Middleware {
 
     static serverErrorHandler (err, req, res, next) {
 
-        if ( err instanceof SyntaxError && err.status === 400 && 'body' in err ) {
+        try {
 
-            return res.status(HTTP.BAD_REQUEST).json({
-                error: "invalid body"
-            });
-        }
-        else {
-            next();
+            if ( err instanceof SyntaxError && err.status === 400 && 'body' in err ) {
+
+                return res.status(HTTP.BAD_REQUEST).json({
+                    error: "invalid body"
+                });
+            }
+            else {
+                next();
+            }
+
+        } catch (e) {
+            Raven.captureException(e);
         }
 
     }
@@ -34,27 +41,33 @@ export default class Middleware {
     // authenticating user with session/jwt
     static authenticate (req, res, next) {
 
-        // checking if authorization header is set in the request.
-        if (req.headers.authorization && req.headers.authorization.split(' ')[0] === "Bearer") {
+        try {
 
-            // verifying the jwt token
-            Jwt.verify(
-                req.headers.authorization.split(' ')[1],
-                new Buffer(process.env.JWT_SECRET, "base64"),
-                { algorithm: 'HS512' },
-                (error, decoded) => {
-                    if (error) {
-                        return res.status(HTTP.BAD_REQUEST).json("Invalid token.");
-                    }
-                    else {
-                        next();
-                    }
-                }
-            );
+            // checking if authorization header is set in the request.
+            if (req.headers.authorization && req.headers.authorization.split(' ')[0] === "Bearer") {
 
-        }
-        else {
-            return res.status(HTTP.BAD_REQUEST).json("No token found.");
+                // verifying the jwt token
+                Jwt.verify(
+                    req.headers.authorization.split(' ')[1],
+                    new Buffer(process.env.JWT_SECRET, "base64"),
+                    { algorithm: 'HS512' },
+                    (error, decoded) => {
+                        if (error) {
+                            return res.status(HTTP.BAD_REQUEST).json("Invalid token.");
+                        }
+                        else {
+                            next();
+                        }
+                    }
+                );
+
+            }
+            else {
+                return res.status(HTTP.BAD_REQUEST).json("No token found.");
+            }
+
+        } catch (e) {
+            Raven.captureException(e);
         }
 
     } // function end

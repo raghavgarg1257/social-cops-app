@@ -4,10 +4,8 @@
 import express from "express";
 import bodyParser from "body-parser";
 import dotenv from "dotenv";
-// import Raven from 'raven';
+import Raven from 'raven';
 //import logger from "morgan";
-import raygun from 'raygun';
-// import domain from 'domain';
 
 
 // importing our files
@@ -20,13 +18,7 @@ dotenv.config();
 
 
 // configure raven
-// Raven.config(process.env.SENTRY_DNS).install();
-
-
-const raygunClient = new raygun.Client().init({ apiKey: 'MWsMaOuIbLQMmVZjRyY6RA==' });
-process.on('uncaughtException', err => {
-    raygunClient.send(err);
-});
+Raven.config(process.env.SENTRY_DNS).install();
 
 
 // initializing server requirments
@@ -34,15 +26,12 @@ const port = process.env.PORT || 3000;
 const app = express();
 
 
-app.use(raygunClient.expressHandler);
-
-
 // to log every request to the console
 //app.use(logger('dev'));
 
 
 // The request handler must be the first middleware on the app for raven
-// app.use(Raven.requestHandler());
+app.use(Raven.requestHandler());
 
 
 // set static files (css and images, etc) location
@@ -55,18 +44,24 @@ app.use(bodyParser.urlencoded({ extended: true }));
 
 
 // The error handler must be before any other error middleware for raven
-// app.use(Raven.errorHandler());
+app.use(Raven.errorHandler());
 
 
 // server error handler
 app.use(Middlewares.serverErrorHandler);
 
 
-// setting up routes for our app
-// we made router a function so that any instance can be passed from here
-// should be defined just before starting the server
-app.use('/', new Routes(express));
+try{
+
+    // setting up routes for our app
+    // we made router a function so that any instance can be passed from here
+    // should be defined just before starting the server
+    app.use('/', new Routes(express));
 
 
-// start the server
-app.listen(port, () => console.log(`App started at: http://localhost:${port}`) );
+    // start the server
+    app.listen(port, () => console.log(`App started at: http://localhost:${port}`) );
+
+} catch (e) {
+    Raven.captureException(e);
+}

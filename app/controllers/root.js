@@ -1,6 +1,6 @@
 "use strict";
 
-// import Raven from 'raven';
+import Raven from 'raven';
 
 import Middlewares from "../helpers/middlewares";
 import HTTP from "../helpers/httpcodes";
@@ -8,26 +8,45 @@ import HTTP from "../helpers/httpcodes";
 export default class Root {
 
     constructor(router) {
-        router.route('/')
 
-        .all(Middlewares.controllerBase)
+        try {
 
-        .get(this.get)
+            router.route('/')
 
-        .post(this.post);
+            .all(Middlewares.controllerBase)
+
+            .get(this.get)
+
+            .post(this.post);
+
+        } catch (e) {
+            Raven.captureException(e);
+        }
+
     }
 
     get(req, res, next) {
-        // try {
-        //    throw new Error('Broke!');
+
+        try {
+
             res.status(HTTP.OK).json("Welcome to my world!");
-        // } catch (e) {
-        //     Raven.captureException(e);
-        // }
+
+        } catch (e) {
+            Raven.captureException(e);
+        }
+
     }
 
     post(req, res, next) {
-        res.status(HTTP.OK).json("So, you know there are more than one type of request");
+
+        try {
+
+            res.status(HTTP.OK).json("So, you know there are more than one type of request");
+
+        } catch (e) {
+            Raven.captureException(e);
+        }
+
     }
 
 

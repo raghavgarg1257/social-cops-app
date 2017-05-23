@@ -1,5 +1,6 @@
 "use strict";
 
+import Raven from 'raven';
 import im from 'imagemagick';
 import uuidV4 from 'uuid/v4';
 import http from 'http';
@@ -15,11 +16,19 @@ import { isExist } from "../helpers/methods";
 export default class ImgThumb {
 
     constructor(router) {
-        router.route('/img-thumb')
 
-        .all(Middlewares.authenticate)
+        try {
 
-        .post(this.post);
+            router.route('/img-thumb')
+
+            .all(Middlewares.authenticate)
+
+            .post(this.post);
+
+        } catch (e) {
+            Raven.captureException(e);
+        }
+
     }
 
     post(req, res, next) {
@@ -118,9 +127,8 @@ export default class ImgThumb {
             });
 
         } catch (e) {
-            console.log('we have got an error', e);
+            Raven.captureException(e);
         }
-
 
     } // post end
 
