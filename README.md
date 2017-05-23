@@ -76,6 +76,6 @@ res: Image
 
 ## Dockerfile
 - node image using is `node:latest`
-- exposed node is 8000
+- exposed node is `8000`
 - `docker build -t node-task .`
 - `docker run -p 3000:8000 -d node-task`
