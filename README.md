@@ -73,3 +73,8 @@ req: POST /img-thumb {
 }
 res: Image
 ```
+
+## Dockerfile
+- exposed node is 8000
+- `docker build -t node-task .`
+- `docker run -p 3000:8000 -d node-task`
