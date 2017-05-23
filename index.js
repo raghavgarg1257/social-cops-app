@@ -4,7 +4,11 @@
 import express from "express";
 import bodyParser from "body-parser";
 import dotenv from "dotenv";
+// import Raven from 'raven';
 //import logger from "morgan";
+import raygun from 'raygun';
+// import domain from 'domain';
+
 
 // importing our files
 import Routes from "./app/routes";
@@ -15,22 +19,43 @@ import Middlewares from "./app/helpers/middlewares";
 dotenv.config();
 
 
+// configure raven
+// Raven.config(process.env.SENTRY_DNS).install();
+
+
+const raygunClient = new raygun.Client().init({ apiKey: 'MWsMaOuIbLQMmVZjRyY6RA==' });
+process.on('uncaughtException', err => {
+    raygunClient.send(err);
+});
+
+
 // initializing server requirments
 const port = process.env.PORT || 3000;
 const app = express();
+
+
+app.use(raygunClient.expressHandler);
 
 
 // to log every request to the console
 //app.use(logger('dev'));
 
 
+// The request handler must be the first middleware on the app for raven
+// app.use(Raven.requestHandler());
+
+
 // set static files (css and images, etc) location
-app.use(express.static('public'));
+// app.use(express.static('public'));
 
 
 // setting up body parser
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
+
+
+// The error handler must be before any other error middleware for raven
+// app.use(Raven.errorHandler());
 
 
 // server error handler

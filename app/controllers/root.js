@@ -1,5 +1,7 @@
 "use strict";
 
+// import Raven from 'raven';
+
 import Middlewares from "../helpers/middlewares";
 import HTTP from "../helpers/httpcodes";
 
@@ -16,7 +18,12 @@ export default class Root {
     }
 
     get(req, res, next) {
-        res.status(HTTP.OK).json("Welcome to my world!");
+        // try {
+            throw new Error('Broke!');
+            res.status(HTTP.OK).json("Welcome to my world!");
+        // } catch (e) {
+        //     Raven.captureException(e);
+        // }
     }
 
     post(req, res, next) {

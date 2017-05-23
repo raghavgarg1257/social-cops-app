@@ -1,0 +1,41 @@
+import http from 'http';
+import assert from 'assert';
+
+import '../index.js';
+
+const url = "http://localhost:8000";
+
+
+describe('Node Server', () => {
+
+  describe('Node Server', () => {
+  it('should return 200', done => {
+    http.get(url, res => {
+      assert.equal(200, res.statusCode);
+      done();
+    });
+  });
+});
+
+/*
+describe('Login', function() {
+    describe('getJwtToken()', function() {
+
+        const testUrl = url + '/login';
+
+        it("returns status 200", function() {
+            axios.post(testUrl, {})
+            .then(function(response) {
+                response.status = 234;
+                assert.equal(200, response.status);
+            })
+            .catch(function(error) {});
+        });
+
+        it('should return a jwt token when provided username and password', function() {
+            assert.equal(-1, [1,2,3].indexOf(4));
+        });
+
+    });
+});
+*/
