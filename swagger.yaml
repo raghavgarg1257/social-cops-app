@@ -1,0 +1,143 @@
+swagger: "2.0"
+info:
+  description: "The problem statement are uploaded in the repo, and the whole app is according to those instructions."
+  version: "1.0.0"
+  title: "Social Cops NodeJS Task"
+  contact:
+    email: "raghavgarg1257@gmail.com"
+host: "localhost:8000"
+externalDocs:
+  description: "Find out more about this app"
+  url: "https://github.com/raghavgarg1257/social-cops-app"
+paths:
+  /:
+    get:
+      tags:
+      - "root"
+      summary: "Shows a text message"
+      description: ""
+      operationId: "getRoot"
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      responses:
+        200:
+          description: "successful operation"
+        400:
+          description: "Invalid input"
+    post:
+      tags:
+      - "root"
+      summary: "Shows a text message"
+      description: ""
+      operationId: "postRoot"
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      responses:
+        200:
+          description: "successful operation"
+        400:
+          description: "Invalid input"
+  /login:
+    post:
+      tags:
+      - "login"
+      summary: "Logs user into the system"
+      description: "Generate JWT Token which will be used to access protected routes"
+      operationId: "loginUser"
+      consumes:
+      - "application/x-www-form-urlencoded"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "username"
+        in: "formData"
+        description: "The user name for login"
+        required: true
+        type: "string"
+      - name: "password"
+        in: "formData"
+        description: "The password for login in clear text"
+        required: true
+        type: "string"
+      responses:
+        200:
+          description: "successful operation"
+        400:
+          description: "Invalid username/password supplied"
+  /json-patch:
+    post:
+      tags:
+      - "json-patch"
+      summary: "Apply json patch to the JSON Object."
+      description: ""
+      operationId: "applyJsonPatch"
+      consumes:
+      - "application/json"
+      - "application/x-www-form-urlencoded"
+      produces:
+      - "application/json"
+      parameters:
+      - in: "body"
+        name: "body"
+        description: ""
+        required: true
+        schema:
+          $ref: "#/definitions/JsonPatch"
+      responses:
+        200:
+          description: "successful operation"
+        400:
+          description: "Invalid JSON or Invalid JSON Patch Object"
+      security:
+      - Bearer: []
+  /img-thumb:
+    post:
+      tags:
+      - "img-thumb"
+      summary: "Convert public image url to 50x50 pixel thumbnail."
+      description: ""
+      operationId: "createThumbnail"
+      consumes:
+      - "application/x-www-form-urlencoded"
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "url"
+        in: "formData"
+        description: "The public image url"
+        required: true
+        type: "string"
+      responses:
+        200:
+          description: "successful operation"
+        400:
+          description: "Invalid URL or Invalid Image"
+      security:
+      - Bearer: []
+securityDefinitions:
+  Bearer:
+    type: "apiKey"
+    name: "Authorization"
+    in: "header"
+definitions:
+  Patch:
+    type: "object"
+    properties:
+      op:
+        type: "string"
+      path:
+        type: "string"
+      value:
+        type: "object"
+  JsonPatch:
+    type: "object"
+    properties:
+      json:
+        type: "object"
+      patch:
+        $ref: "#/definitions/Patch"

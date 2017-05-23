@@ -79,3 +79,12 @@ res: Image
 - exposed port is `8000`
 - to build docker image `docker build -t node-task .`
 - to run the docker image `docker run -p 3000:8000 -d node-task`
+
+
+## Swagger Docs
+**Note:** keep a open daemon of actual server.
+**Note:** `/img-thumb` would not be tested with it properly as an image is the response of the route and swagger is not able to show it.
+```
+cd swagger-docs-server
+npm start # link will be printed in the terminal
+```

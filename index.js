@@ -5,6 +5,7 @@ import express from "express";
 import bodyParser from "body-parser";
 import dotenv from "dotenv";
 import Raven from 'raven';
+import cors from 'cors';
 //import logger from "morgan";
 
 
@@ -33,6 +34,9 @@ const app = express();
 // The request handler must be the first middleware on the app for raven
 app.use(Raven.requestHandler());
 
+
+// enablig cors request
+app.use(cors());
 
 // set static files (css and images, etc) location
 // app.use(express.static('public'));

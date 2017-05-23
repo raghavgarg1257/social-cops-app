@@ -38,18 +38,15 @@ export default class JsonPatch {
                 });
             }
 
-            try {
                 const result = jsonpatch.apply(body, patch);
-            } catch (e) {
-                return res.status(HTTP.BAD_REQUEST).json({
-                    error: e.message
-                });
-            }
 
             res.status(HTTP.OK).json(result);
 
         } catch (e) {
             Raven.captureException(e);
+            return res.status(HTTP.BAD_REQUEST).json({
+                error: e.message
+            });
         }
 
     }
