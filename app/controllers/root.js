@@ -19,7 +19,7 @@ export default class Root {
 
     get(req, res, next) {
         // try {
-            throw new Error('Broke!');
+        //    throw new Error('Broke!');
             res.status(HTTP.OK).json("Welcome to my world!");
         // } catch (e) {
         //     Raven.captureException(e);
