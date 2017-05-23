@@ -76,6 +76,6 @@ res: Image
 
 ## Dockerfile
 - node image used is `node:latest`
-- exposed node is `8000`
+- exposed port is `8000`, i.e. while runnning `-p <local port>:8000`
 - to build docker image `docker build -t node-task .`
 - to run the docker image `docker run -p 3000:8000 -d node-task`
