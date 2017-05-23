@@ -1,6 +1,6 @@
 # Social Cops Node JS Task
 
-The problem statement has been uploaded in the repo.
+The problem statement has been uploaded in the repo. [link](https://github.com/raghavgarg1257/social-cops-app/blob/master/NodejsTask.pdf)
 
 Using ES6, with [Babel](http://babeljs.io/)
 
