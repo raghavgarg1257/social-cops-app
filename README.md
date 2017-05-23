@@ -83,6 +83,7 @@ res: Image
 
 ## Swagger Docs
 **Note:** keep a open daemon of actual server.
+
 **Note:** `/img-thumb` would not be tested with it properly as an image is the response of the route and swagger is not able to show it.
 ```
 cd swagger-docs-server
