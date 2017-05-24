@@ -113,7 +113,11 @@ To run the docker image
 ## Swagger Docs ([more details](https://github.com/raghavgarg1257/social-cops-app/tree/master/swagger-docs-server))
 **Note:** keep a open daemon of actual server.
 
-**Note:** To use protected route, run `/login` first then copy `token` from it's response and paste in the top right corner of the screen and click `explore`.
+**Note:** To use protected route,
+> run `/login`
+> copy `token` value from it's response
+> paste in the top right corner of the screen
+> click `explore`.
 
 **Note:** `/img-thumb` would not be tested with it properly as an image is the response of the route and swagger is not able to show it.
 ```
