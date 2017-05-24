@@ -15,7 +15,7 @@ These are the tasks upon which i am going to be tested.
 - 100% code coverage in test suite ([istanbul](https://istanbul.js.org/)).
 - Extra documentation.
   - [JsDocs](http://usejsdoc.org/)
-  - ~~[Swagger](http://swagger.io/specification/)~~
+  - ~~[Swagger Docs](http://swagger.io/specification/)~~
 - ~~Logging/Monitoring Tool.~~ used [sentry](https://sentry.io)
 - Javascript style and linting.
 - ~~Dockerize.~~

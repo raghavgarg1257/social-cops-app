@@ -89,3 +89,8 @@ res: Image
 cd swagger-docs-server
 npm start # link will be printed in the terminal
 ```
+
+
+## Task Assessment
+
+The [task progress](https://github.com/raghavgarg1257/social-cops-app/blob/master/TaskAssessment.md) according to the [NodejsTask.pdf](https://github.com/raghavgarg1257/social-cops-app/blob/master/NodejsTask.pdf).
