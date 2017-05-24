@@ -12,6 +12,7 @@ The [task progress](https://github.com/raghavgarg1257/social-cops-app/blob/maste
 ## Pre-requisite
 1. [NodeJS](https://nodejs.org/en/)
 2. Globally installed [nodemon](https://nodemon.io/) (to use `npm run dev`)
+3. Globally installed [istanbul](https://istanbul.js.org/) (to use `npm run cover`)
 
 
 ## Setup
@@ -19,14 +20,14 @@ The [task progress](https://github.com/raghavgarg1257/social-cops-app/blob/maste
 git clone git@github.com:raghavgarg1257/social-cops-app.git
 cd social-cops-app
 cp .env.example .env
-nano .env # optional, you can set port and jwt secret
+nano .env # optional, you can set port and jwt secret and sentry dns for logging errors
 npm install
 npm start # the server will be started and link will be printed in the terminal
 ```
 
 
 ## Usage (available routes)
-The routes can be tested using [Postman](https://chrome.google.com/webstore/detail/postman/fhbjgbiflinjbdggehcddcbncdddomop?hl=en).
+The routes can be tested using [Postman](https://chrome.google.com/webstore/detail/postman/fhbjgbiflinjbdggehcddcbncdddomop?hl=en) or you can use [Swagger Docs](https://github.com/raghavgarg1257/social-cops-app/tree/master/swagger-docs-server).
 
 **Note** - to use protected routes an extra header needs to be added in request of format like:
 ```
@@ -34,6 +35,7 @@ HEADER {
     "Authorization" : "Bearer JWT_TOKEN" # note the space between keyword Bearer and JWT_TOKEN
 }
 ```
+
 
 ```
 type: public
@@ -82,8 +84,18 @@ res: Image
 ```
 
 
+## Test Suite
+To run normal test
+    npm test
+
+To run test with code coverage report in terminal
+    npm run nyc
+
+To get code coverage report in html
+    npm run cover # then open index.html in /coverage/Icov-report/index/html    
+
+
 ## Dockerfile
-- node image used is `node:latest`
 - exposed port is `8000`
 - to build docker image `docker build -t node-task .`
 - to run the docker image `docker run -p 3000:8000 -d node-task`
@@ -91,6 +103,8 @@ res: Image
 
 ## Swagger Docs ([more details](https://github.com/raghavgarg1257/social-cops-app/tree/master/swagger-docs-server))
 **Note:** keep a open daemon of actual server.
+
+**Note:** To use open route, run `/login` first then copy `token` from it's response and paste in the top right corner of the screen and click `explore`.
 
 **Note:** `/img-thumb` would not be tested with it properly as an image is the response of the route and swagger is not able to show it.
 ```
