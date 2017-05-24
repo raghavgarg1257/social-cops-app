@@ -29,7 +29,7 @@ npm start # the server will be started and link will be printed in the terminal
 ## Usage (available routes)
 The routes can be tested using [Postman](https://chrome.google.com/webstore/detail/postman/fhbjgbiflinjbdggehcddcbncdddomop?hl=en) or you can use [Swagger Docs](https://github.com/raghavgarg1257/social-cops-app/tree/master/swagger-docs-server).
 
-**Note** - to use protected routes an extra header needs to be added in request of format like:
+**Note:** to use protected routes an extra header needs to be added in request of format like:
 ```
 HEADER {
     "Authorization" : "Bearer JWT_TOKEN" # note the space between keyword Bearer and JWT_TOKEN
