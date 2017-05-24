@@ -25,3 +25,18 @@ export const isExist = val => {
     }
 
 }
+
+// Global Error Handler
+export class ErrorHandler {
+
+    constructor (res) {
+        this.res = res;
+    }
+
+    ISE(e) {
+        return this.res.status(HTTP.INTERNAL_SERVER_ERROR).json({
+            error: e
+        });
+    }
+
+}

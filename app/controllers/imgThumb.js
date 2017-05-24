@@ -11,7 +11,7 @@ import validUrl from 'valid-url';
 
 import Middlewares from "../helpers/middlewares";
 import HTTP from "../helpers/httpcodes";
-import { isExist } from "../helpers/methods";
+import { isExist, ErrorHandler } from "../helpers/methods";
 
 export default class ImgThumb {
 
@@ -27,6 +27,7 @@ export default class ImgThumb {
 
         } catch (e) {
             Raven.captureException(e);
+            return new ErrorHandler(res).ISE(e);
         }
 
     }
@@ -46,12 +47,18 @@ export default class ImgThumb {
 
             if (!isExist(url)) {
                 return res.status(HTTP.BAD_REQUEST).json({
-                    error: 'The url is required field'
+                    error: {
+                        message: "The url is required field",
+                        name: "REQUIRED_FIELDS_NOT_FOUND"
+                    }
                 });
             }
             else if (!validUrl.isUri(url)) {
                 return res.status(HTTP.BAD_REQUEST).json({
-                    error: 'The url is not valid'
+                    error: {
+                        message: "The url is not valid",
+                        name: "INVALID_INPUT"
+                    }
                 });
             }
 
@@ -66,7 +73,10 @@ export default class ImgThumb {
                     if (!isExist(imageFileType)) {
                         urlHasError = true;
                         return res.status(HTTP.BAD_REQUEST).json({
-                            error: "The url is not a valid image"
+                            error: {
+                                message: "The url is not a valid image",
+                                name: "INVALID_INPUT"
+                            }
                         });
                     }
                     else {
@@ -74,7 +84,10 @@ export default class ImgThumb {
                         if (Object.keys(mimeType).indexOf(ext) == -1) {
                             urlHasError = true;
                             return res.status(HTTP.BAD_REQUEST).json({
-                                error: "The url is not a valid image extension"
+                                error: {
+                                    message: "The url is not a valid image extension",
+                                    name: "INVALID_INPUT"
+                                }
                             });
                         }
                     }
@@ -109,7 +122,12 @@ export default class ImgThumb {
                                     output.pipe(res);
                                 });
                                 output.on('error', () => {
-                                    return res.status(HTTP.INTERNAL_SERVER_ERROR).end('Error occured!');
+                                    return res.status(HTTP.INTERNAL_SERVER_ERROR).json({
+                                        error: {
+                                            message: "Error occured!",
+                                            name: "UNKOWN_ERROR"
+                                        }
+                                    });
                                 });
 
                             }); // imagemagik resize end
@@ -123,11 +141,17 @@ export default class ImgThumb {
 
             })
             .on('error', error => {
-                return res.status(HTTP.INTERNAL_SERVER_ERROR).end('Error occured!');
+                return res.status(HTTP.INTERNAL_SERVER_ERROR).json({
+                    error: {
+                        message: "Error occured!",
+                        name: "UNKOWN_ERROR"
+                    }
+                });
             });
 
         } catch (e) {
             Raven.captureException(e);
+            return new ErrorHandler(res).ISE(e);
         }
 
     } // post end

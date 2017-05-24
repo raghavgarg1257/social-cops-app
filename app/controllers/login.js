@@ -5,7 +5,7 @@ import Jwt from "jsonwebtoken";
 
 import Middlewares from "../helpers/middlewares";
 import HTTP from "../helpers/httpcodes";
-import { isExist } from "../helpers/methods";
+import { isExist, ErrorHandler } from "../helpers/methods";
 
 export default class Login {
 
@@ -21,6 +21,7 @@ export default class Login {
 
         } catch (e) {
             Raven.captureException(e);
+            return new ErrorHandler(res).ISE(e);
         }
 
     }
@@ -34,7 +35,10 @@ export default class Login {
 
             if (!isExist(username) || !isExist(password)) {
                 return res.status(HTTP.BAD_REQUEST).json({
-                    error: "Both username and password are required fields"
+                    error: {
+                        message: "Both username and password are required fields",
+                        name: "REQUIRED_FIELDS_NOT_FOUND"
+                    }
                 });
             }
 
@@ -51,6 +55,7 @@ export default class Login {
 
         } catch (e) {
             Raven.captureException(e);
+            return new ErrorHandler(res).ISE(e);
         }
 
     }

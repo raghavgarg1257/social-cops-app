@@ -15,7 +15,10 @@ export default class Middleware {
             if ( err instanceof SyntaxError && err.status === 400 && 'body' in err ) {
 
                 return res.status(HTTP.BAD_REQUEST).json({
-                    error: "invalid body"
+                    error: {
+                        message: "invalid body",
+                        name: "INVALID_INPUT"
+                    }
                 });
             }
             else {
@@ -53,7 +56,12 @@ export default class Middleware {
                     { algorithm: 'HS512' },
                     (error, decoded) => {
                         if (error) {
-                            return res.status(HTTP.BAD_REQUEST).json("Invalid token.");
+                            return res.status(HTTP.BAD_REQUEST).json({
+                                error: {
+                                    message: "invalid token in the header",
+                                    name: "INVALID_TOKEN"
+                                }
+                            });
                         }
                         else {
                             next();
@@ -63,7 +71,12 @@ export default class Middleware {
 
             }
             else {
-                return res.status(HTTP.BAD_REQUEST).json("No token found.");
+                return res.status(HTTP.BAD_REQUEST).json({
+                    error: {
+                        message: "no token found in the header",
+                        name: "TOKEN_NOT_FOUND"
+                    }
+                });
             }
 
         } catch (e) {

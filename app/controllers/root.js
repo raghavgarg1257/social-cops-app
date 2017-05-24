@@ -4,6 +4,7 @@ import Raven from 'raven';
 
 import Middlewares from "../helpers/middlewares";
 import HTTP from "../helpers/httpcodes";
+import { ErrorHandler } from "../helpers/methods";
 
 export default class Root {
 
@@ -33,6 +34,7 @@ export default class Root {
 
         } catch (e) {
             Raven.captureException(e);
+            return new ErrorHandler(res).ISE(e);
         }
 
     }
@@ -45,6 +47,7 @@ export default class Root {
 
         } catch (e) {
             Raven.captureException(e);
+            return new ErrorHandler(res).ISE(e);
         }
 
     }

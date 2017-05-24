@@ -24,7 +24,7 @@ Raven.config(process.env.SENTRY_DNS).install();
 
 // initializing server requirments
 const port = process.env.PORT || 3000;
-const app = express();
+export const app = express();
 
 
 // to log every request to the console
@@ -55,7 +55,7 @@ app.use(Raven.errorHandler());
 app.use(Middlewares.serverErrorHandler);
 
 
-try{
+try {
 
     // setting up routes for our app
     // we made router a function so that any instance can be passed from here
