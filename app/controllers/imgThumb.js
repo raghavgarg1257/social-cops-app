@@ -4,7 +4,6 @@ import Raven from 'raven';
 import im from 'imagemagick';
 import uuidV4 from 'uuid/v4';
 import http from 'http';
-import https from 'https';
 import fs from 'fs';
 import fileType from 'file-type';
 import validUrl from 'valid-url';
