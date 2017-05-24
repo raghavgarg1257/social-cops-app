@@ -1,8 +1,8 @@
 # Social Cops Node JS Task
 
-The problem statement has been uploaded in the repo. [link](https://github.com/raghavgarg1257/social-cops-app/blob/master/NodejsTask.pdf)
+The [problem statement](https://github.com/raghavgarg1257/social-cops-app/blob/master/NodejsTask.pdf) has been uploaded in the repo.
 
-Using ES6, with [Babel](http://babeljs.io/)
+Using ES6 syntax, with [Babel](http://babeljs.io/).
 
 
 ## Task Assessment
@@ -86,12 +86,15 @@ res: Image
 
 ## Test Suite
 To run normal test
+
     npm test
 
 To run test with code coverage report in terminal
+
     npm run nyc
 
 To get code coverage report in html
+
     npm run cover # then open index.html in /coverage/Icov-report/index/html    
 
 
