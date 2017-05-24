@@ -4,9 +4,15 @@ The problem statement has been uploaded in the repo. [link](https://github.com/r
 
 Using ES6, with [Babel](http://babeljs.io/)
 
+
+## Task Assessment
+The [task progress](https://github.com/raghavgarg1257/social-cops-app/blob/master/TaskAssessment.md) according to the [NodejsTask.pdf](https://github.com/raghavgarg1257/social-cops-app/blob/master/NodejsTask.pdf).
+
+
 ## Pre-requisite
 1. [NodeJS](https://nodejs.org/en/)
 2. Globally installed [nodemon](https://nodemon.io/) (to use `npm run dev`)
+
 
 ## Setup
 ```
@@ -17,6 +23,7 @@ nano .env # optional, you can set port and jwt secret
 npm install
 npm start # the server will be started and link will be printed in the terminal
 ```
+
 
 ## Usage (available routes)
 The routes can be tested using [Postman](https://chrome.google.com/webstore/detail/postman/fhbjgbiflinjbdggehcddcbncdddomop?hl=en).
@@ -74,6 +81,7 @@ req: POST /img-thumb {
 res: Image
 ```
 
+
 ## Dockerfile
 - node image used is `node:latest`
 - exposed port is `8000`
@@ -89,8 +97,3 @@ res: Image
 cd swagger-docs-server
 npm start # link will be printed in the terminal
 ```
-
-
-## Task Assessment
-
-The [task progress](https://github.com/raghavgarg1257/social-cops-app/blob/master/TaskAssessment.md) according to the [NodejsTask.pdf](https://github.com/raghavgarg1257/social-cops-app/blob/master/NodejsTask.pdf).
