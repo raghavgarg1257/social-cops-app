@@ -99,9 +99,15 @@ To get code coverage report in html
 
 
 ## Dockerfile
-- exposed port is `8000`
-- to build docker image `docker build -t node-task .`
-- to run the docker image `docker run -p 3000:8000 -d node-task`
+**Note:** exposed port is `8000`
+
+To build docker image
+
+    docker build -t node-task .
+
+To run the docker image
+
+    docker run -p 3000:8000 -d node-task
 
 
 ## Swagger Docs ([more details](https://github.com/raghavgarg1257/social-cops-app/tree/master/swagger-docs-server))
