@@ -12,10 +12,10 @@ These are the tasks upon which i am going to be tested.
 - ~~npm scripts.~~
 
 # Bonus Tasks
-- 100% code coverage in test suite ([istanbul](https://istanbul.js.org/)).
+- ~~Code coverage report ([istanbul](https://istanbul.js.org/)).~~
 - Extra documentation.
   - [JsDocs](http://usejsdoc.org/)
   - ~~[Swagger Docs](http://swagger.io/specification/)~~
-- ~~Logging/Monitoring Tool~~ ([sentry](https://sentry.io)).
+- ~~Logging/Monitoring tool~~ ([sentry](https://sentry.io)).
 - Javascript style and linting.
 - ~~Dockerize.~~
