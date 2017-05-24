@@ -81,7 +81,7 @@ res: Image
 - to run the docker image `docker run -p 3000:8000 -d node-task`
 
 
-## Swagger Docs
+## Swagger Docs ([more details](https://github.com/raghavgarg1257/social-cops-app/tree/master/swagger-docs-server))
 **Note:** keep a open daemon of actual server.
 
 **Note:** `/img-thumb` would not be tested with it properly as an image is the response of the route and swagger is not able to show it.
