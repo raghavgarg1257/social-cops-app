@@ -6,7 +6,7 @@ import bodyParser from "body-parser";
 import dotenv from "dotenv";
 import Raven from "raven";
 import cors from "cors";
-import logger from "morgan";
+// import logger from "morgan";
 
 
 // importing our files
@@ -28,7 +28,7 @@ export const app = express();
 
 
 // to log every request to the console
-app.use(logger('dev'));
+// app.use(logger('dev'));
 
 
 // The request handler must be the first middleware on the app for raven
