@@ -4,7 +4,7 @@ These are the tasks upon which i am going to be tested.
 **Note:** strikethrough indicates the task is completed.
 
 # Actual Tasks
-- Test suite ([mocha](https://mochajs.org/)).
+- ~~Test suite ([mocha](https://mochajs.org/)).~~
 - ~~Handle invalid input in request.~~
 - ~~Use ES6 syntax.~~
 - ~~Use git version control.~~
