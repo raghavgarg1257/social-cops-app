@@ -5,6 +5,12 @@ The [problem statement](https://github.com/raghavgarg1257/social-cops-app/blob/m
 Using ES6 syntax, with [Babel](http://babeljs.io/).
 
 
+## Demo
+You can use the undergiven ip address to make the request using [Postman](https://chrome.google.com/webstore/detail/postman/fhbjgbiflinjbdggehcddcbncdddomop?hl=en). It is hosted on AWS.
+
+    http://35.163.21.122:8000
+
+
 ## Task Assessment
 The [task progress](https://github.com/raghavgarg1257/social-cops-app/blob/master/TaskAssessment.md) according to the [NodejsTask.pdf](https://github.com/raghavgarg1257/social-cops-app/blob/master/NodejsTask.pdf).
 
