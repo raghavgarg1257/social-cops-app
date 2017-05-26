@@ -34,7 +34,7 @@ The [task progress](https://github.com/raghavgarg1257/social-cops-app/blob/maste
     npm install
     npm start # to start the server
     npm run dev # to start the server with nodemon, to develop
-    npm test # to run test	
+    npm test # to run test
     npm run nyc # to run test with code coverage report in terminal
     npm run cover # to get code coverage as an html file
 
@@ -43,57 +43,56 @@ The [task progress](https://github.com/raghavgarg1257/social-cops-app/blob/maste
 The routes can be tested using [Postman](https://chrome.google.com/webstore/detail/postman/fhbjgbiflinjbdggehcddcbncdddomop?hl=en) or you can use [Swagger Docs](https://github.com/raghavgarg1257/social-cops-app/tree/master/swagger-docs-server).
 
 **Note:** to use protected routes an extra header needs to be added in request of format like:
-
-    HEADER {
-        "Authorization" : "Bearer JWT_TOKEN" # note the space between keyword Bearer and JWT_TOKEN
+```
+HEADER {
+    "Authorization" : "Bearer JWT_TOKEN" # note the space between keyword Bearer and JWT_TOKEN
+}
+```
+```
+type: public
+req: GET /
+res: Text
+```
+```
+type: public
+req: POST /
+res: Text
+```
+```
+desc: login route, user can send username and password, and recieve JWT_TOKEN.
+    : JWT_TOKEN can be used to making request to protected routes.
+    : Currently no authentication process is in place, every username and password will be processed.
+type: public
+req: POST /login {
+    "username" : String,
+    "password" : String
+}
+res:{
+    "message": String,
+    "data": {
+        "username": String,
+        "token": JWT_TOKEN
     }
-
-
-
-    type: public
-    req: GET /
-    res: Text
-
-
-
-    type: public
-    req: POST /
-    res: Text
-
-
-
-    desc: login route, user can send username and password, and recieve JWT_TOKEN.
-        : JWT_TOKEN can be used to making request to protected routes.
-        : Currently no authentication process is in place, every username and password will be processed.
-    type: public
-    req: POST /login {
-        "username" : String,
-        "password" : String
-    }
-    res:{
-        "message": String,
-        "data": {
-            "username": String,
-            "token": JWT_TOKEN
-        }
-    }
-
-    desc: json-patch route, user can send json and patch(http://jsonpatch.com/), and recieve new json.
-    type: protected
-    req: POST /json-patch {
-        json : JSON Object,
-        patch: JSON Patch Object
-    }
-    req: JSON Object (after applying the patch)
-
-    desc: image thumbnail route, user can send public image url, and recieve 50x50 pixel image as response.
-        : the url with 'https' will not work.
-    type: protected
-    req: POST /img-thumb {
-        url : String (valid image url)
-    }
-    res: Image
-
+}
+```
+```
+desc: json-patch route, user can send json and patch(http://jsonpatch.com/), and recieve new json.
+type: protected
+req: POST /json-patch {
+    json : JSON Object,
+    patch: JSON Patch Object
+}
+res: JSON Object (after applying the patch)
+```
+```
+desc: image thumbnail route, user can send public image url, and recieve 50x50 pixel image as response.
+    : the url with 'https' will not work.
+type: protected
+req: POST /img-thumb {
+    url : String (valid image url)
+}
+res: Image
+```
 
 ## Test Suite
 To run normal test
