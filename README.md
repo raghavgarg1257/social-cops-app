@@ -31,7 +31,7 @@ The [task progress](https://github.com/raghavgarg1257/social-cops-app/blob/maste
 
 
 ## Available Npm Script
-    npm install
+    npm install # to install depensencies
     npm start # to start the server
     npm run dev # to start the server with nodemon, to develop
     npm test # to run test
@@ -105,7 +105,7 @@ To run test with code coverage report in terminal
 
 To get code coverage report in html
 
-    npm run cover # then open index.html in /coverage/Icov-report/index/html    
+    npm run cover # then open index.html in /coverage/Icov-report/index/html
 
 
 ## Deploy using Docker
