@@ -49,13 +49,18 @@ The routes can be tested using [Postman](https://chrome.google.com/webstore/deta
     }
 
 
+
     type: public
     req: GET /
     res: Text
 
+
+
     type: public
     req: POST /
     res: Text
+
+
 
     desc: login route, user can send username and password, and recieve JWT_TOKEN.
         : JWT_TOKEN can be used to making request to protected routes.
