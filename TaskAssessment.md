@@ -1,5 +1,5 @@
 # Mini Tasks
-These are the tasks upon which i am going to be tested.
+These are the tasks upon which I am going to be tested.
 
 **Note:** strikethrough indicates the task is completed.
 
@@ -16,6 +16,6 @@ These are the tasks upon which i am going to be tested.
 - Extra documentation.
   - [JsDocs](http://usejsdoc.org/)
   - ~~[Swagger Docs](http://swagger.io/specification/)~~
-- ~~Logging/Monitoring tool~~ ([sentry](https://sentry.io)).
+- ~~Logging/Monitoring tool ([sentry](https://sentry.io)).~~
 - Javascript style and linting.
 - ~~Dockerize.~~

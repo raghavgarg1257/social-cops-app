@@ -32,6 +32,15 @@ npm start # the server will be started and link will be printed in the terminal
 ```
 
 
+## Available Npm Script
+    npm install
+    npm start # to start the server
+    npm run dev # to start the server with nodemon, to develop
+    npm test # to run test	
+    npm run nyc # to run test with code coverage report in terminal
+    npm run cover # to get code coverage as an html file
+
+
 ## Usage (available routes)
 The routes can be tested using [Postman](https://chrome.google.com/webstore/detail/postman/fhbjgbiflinjbdggehcddcbncdddomop?hl=en) or you can use [Swagger Docs](https://github.com/raghavgarg1257/social-cops-app/tree/master/swagger-docs-server).
 
@@ -104,7 +113,7 @@ To get code coverage report in html
     npm run cover # then open index.html in /coverage/Icov-report/index/html    
 
 
-## Dockerfile
+## Deploy using Docker
 **Note:** exposed port is `8000`
 
 To build docker image
@@ -117,7 +126,7 @@ To run the docker image
 
 
 ## Swagger Docs ([more details](https://github.com/raghavgarg1257/social-cops-app/tree/master/swagger-docs-server))
-**Note:** keep a open daemon of actual server.
+**Note:** keep an open daemon of actual server.
 
 **Note:** To use protected route, run `/login`, then copy `token` value from it's response and paste in the top right corner of the screen, then click `explore`.
 
